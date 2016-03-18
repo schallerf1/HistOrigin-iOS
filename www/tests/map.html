@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeIBGBo6ocbGCsQFwjttRGiY8SKmNMRDM&sensor=false"></script>
+		<script src="../js/Libraries/jquery.js"></script>
+		<script src="../js/Libraries/myphp.min.js"></script>
+		<script src="../js/Prototypes/Historigin/Map/Map.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/_reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />	
+		
+	</head>
+	<body>
+		<div id="map"></div>
+		
+		<script>
+			$(function(){
+				var M = new Map('map');
+				m = M.addMarker(39.976068, -83.003297);
+				M.removeMarker(m);
+				M.setHeadingPin(39.976068, -83.003297, 12);
+				//M.setCenter(39.976068, -89.003297)
+			});
+		</script>
+	</body>
+</html>

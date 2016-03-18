@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8"/>
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeIBGBo6ocbGCsQFwjttRGiY8SKmNMRDM&sensor=false"></script>
+		<script type="text/javascript" src="js/Libraries/myphp.min.js"></script>
+		<script type="text/javascript" src="js/Libraries/jquery.js"></script>
+		<script type="text/javascript" src="js/Libraries/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/Libraries/jquery.touchSwipe.min.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/Prototypes/Historigin/Collection/Collection.js"></script>
+		<script type="text/javascript" src="js/Prototypes/Historigin/Console/Console.js"></script>
+		<script type="text/javascript" src="js/Prototypes/Historigin/Geolocation/Geolocation.js"></script>
+		<script type="text/javascript" src="js/Prototypes/Historigin/Map/Map.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="TtsPlugin.js"></script>
+		<script type="text/javascript" src="statusbarnotification.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/_reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />	
+
+    </head>
+    <body id="map-container">
+		<div id="splash-screen">
+			<img id="splash-icon" src="img/splash-animation.gif" />
+		</div>
+		<div id="login-sign-up">
+			<div class="login-container">
+				<h2>Welcome to HistOrigin</h2>
+				<div style="margin-top:5%;" class="gold">Login/Signup</div>
+				<div>For better experience please login or sign up.</div>
+
+				<form style="margin-top:5%;">
+					<label>Username:</label>
+					<input type="text" name="username" />
+					<label>Password:</label>
+					<input type="password" name="password" />
+					<input style="margin-top:5%;" class="submit" type="submit" value="Login" />
+					<div class="right skip-login" style="margin-top:5%;">Skip Login <img src="img/icon-arrow-right.png" /></div>
+				</form>
+
+
+			</div>
+		</div>
+		<div id="home">
+			<div class="toolbar">
+				<div class="folder">
+					<ul class="folder-menu menu">
+						<li link="queue">Queue</li>
+						<li link="history">History</li>
+						<li link="my-collection">My Collection</li>
+					</ul>
+				</div>
+				<div class="search">
+					<form id="search">
+						<input class="search-box" type="text" value="" /> <div class="search-icon"><img style="margin-top:5px; margin-left:5px;" src="img/icon-search.png" /></div>
+					</form>
+				</div>
+				<div class="settings">
+					<ul class="settings-menu menu">
+						<li link="settings-settings">Settings</li>
+						<li link="settings-filter">Filter</li>
+						<li link="settings-help">Help</li>
+						<li link="suppress-load" href="http://historigin.com/about-historigin">About</li>
+						<li link="suppress-load" href="http://historigin.com/#add-record">Add Story</li>
+						<li link="suppress-load" href="http://historigin.com/feedback">Give Feedback</li>
+						<li link="suppress-load" href="http://historigin.com/disclaimer">Disclaimer</li>
+						<li link="suppress-load" href="http://historigin.com/terms-of-use">Terms of Use</li>
+						<li link="suppress-load" href="http://historigin.com/privacy-policy">Privacy Policy</li>
+					</ul>
+				</div>
+			</div>
+			<div class="overlay-lock-position">
+				<img style="height:35px;margin-top:8px" src="img/overlay-lock-position.png" />
+			</div>
+			<div class="overlay-explorer-mode" mode="disabled">
+				<img style=" height:35px;margin-top:8px" src="img/icon-explore.png" />
+			</div>
+			<div id="map">
+
+			</div>
+			<div id="now-playing">
+				<div class="grip">
+				
+				</div>
+				Waiting for next story...
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="settings-settings">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					Settings
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="settings-settings" class="breadcrumb-selected">Settings</div>
+				<div link="settings-filter">Filter</div>
+				<div link="settings-help">Help</div>
+				<div link="settings-about">About</div>
+			</div>
+			<form class="settings-container" id="settings-form">
+				<div class="settings-section">
+					<h3>Radius</h3>
+					Announce Radius within:
+					<select style="float:right;" name="settings.radius">
+						<option value="3">3 miles</option>
+						<option value="5">5 miles</option>
+						<option value="10">10 miles</option>
+						<option value="15">15 miles</option>
+						<option value="20">20 miles</option>
+					</select>
+				</div>
+				<div class="settings-section">
+					<h3>Debug</h3>
+					<label>
+						Show Console
+						<input class="right" type="checkbox" name="settings.console" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<h3>Text to Speech</h3>
+					<label>
+						Enabled
+						<input class="right" type="checkbox" name="settings.tts_enabled" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<h3>Battery</h3>
+					<label>
+						Enable GPS
+						<input class="right" type="checkbox" name="settings.gps_enabled" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<h3>Local Storage</h3>
+					<label>
+						<input type="button" id="local_storage" value="Clear Local Storage" />
+					</label>
+				</div>
+			</form>
+		</div>
+		<div class="settings-menu-screen" id="settings-filter">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					Filter
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="settings-settings">Settings</div>
+				<div class="breadcrumb-selected" link="settings-filter">Filter</div>
+				<div link="settings-help">Help</div>
+				<div link="settings-about">About</div>
+			</div>
+			<form class="settings-container">
+				<div class="settings-section">
+					<h3>Choose Your Filter</h3>
+					<label>
+						<b>Community Origin Stories</b>
+						<input class="right" type="checkbox" name="settings.filter_incorporated_data" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<label>
+						Historical Markers
+						<input class="right" type="checkbox" name="settings.filter_hmdb_data" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<label>
+						Historical Societies
+						<input class="right" type="checkbox" name="settings.filter_museum_data" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<label>
+						Historical Sites / National Parks
+						<input class="right" type="checkbox" name="settings.filter_site_data" />
+					</label>
+				</div>
+				<div class="settings-section">
+					<label>
+						Visitor Centers
+						<input class="right" type="checkbox" name="settings.filter_visitor_data" />
+					</label>
+				</div>
+			</form>
+		</div>
+		<div class="settings-menu-screen" id="settings-help">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					Help
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="settings-settings">Settings</div>
+				<div link="settings-filter">Filter</div>
+				<div link="settings-help" class="breadcrumb-selected">Help</div>
+				<div link="settings-about">About</div>
+			</div>
+			<div class="settings-container">
+				<div class="settings-section">
+					<h3>Help</h3>
+					Lorem Ipsum
+				</div>
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="settings-about">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					About
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="settings-settings">Settings</div>
+				<div link="settings-filter">Filter</div>
+				<div link="settings-help">Help</div>
+				<div class="breadcrumb-selected" link="settings-about">About</div>
+			</div>
+			<div class="settings-container">
+				<div class="settings-section">
+					<h3>About</h3>
+					HistOrigin 1.5 <br />
+					Developed by Local Highway History LLC.
+				</div>
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="queue">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					Queue
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="queue" class="breadcrumb-selected">Queue</div>
+				<div link="history">History</div>
+				<div link="my-collection">My Collection</div>
+			</div>
+			<div class="settings-multi-select">
+				<div class="multi-select-drop-down">
+					<img style="margin-top:5px; margin-left:5px; float:left;" src="img/checkbox-off.png" />
+					<div class="down-arrow">
+						▼
+					</div>
+					<ul class="multi-select-drop">
+						<li action="select-all">Select All</li>
+						<li action="select-none">Select None</li>
+					</ul>
+				</div>
+				<select class="bulk-action-select">
+					<option>Select Action</option>
+					<option value="add-to-my-collection">Add to My Collection</option>	
+					<option value="delete">Delete</option>	
+				</select>
+			</div>
+			<div class="settings-container">
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="history">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					History
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="queue">Queue</div>
+				<div link="history" class="breadcrumb-selected">History</div>
+				<div link="my-collection">My Collection</div>
+			</div>
+			<div class="settings-multi-select">
+				<div class="multi-select-drop-down">
+					<img style="margin-top:5px; margin-left:5px; float:left;" src="img/checkbox-off.png" />
+					<div class="down-arrow">
+						▼
+					</div>
+					<ul class="multi-select-drop">
+						<li action="select-all">Select All</li>
+						<li action="select-none">Select None</li>
+					</ul>
+				</div>
+				<select class="bulk-action-select">
+					<option>Select Action</option>
+					<option value="play">Add to Play Queue</option>	
+					<option value="add-to-my-collection">Add to My Collection</option>	
+					<option value="delete">Delete</option>
+				</select>
+			</div>
+			<div class="settings-container">
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="my-collection">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					My Collection
+				</div>
+			</div>
+			<div class="settings-breadcrumb menu">
+				<div link="queue">Queue</div>
+				<div link="history">History</div>
+				<div link="my-collection" class="breadcrumb-selected">My Collection</div>
+			</div>
+			<div class="settings-multi-select">
+				<div class="multi-select-drop-down">
+					<img style="margin-top:5px; margin-left:5px; float:left;" src="img/checkbox-off.png" />
+					<div class="down-arrow">
+						▼
+					</div>
+					<ul class="multi-select-drop">
+						<li action="select-all">Select All</li>
+						<li action="select-none">Select None</li>
+					</ul>
+					
+				</div>
+				<select class="bulk-action-select">
+					<option>Select Action</option>
+					<option value="play">Add to Play Queue</option>	
+					<option value="delete">Delete</option>	
+				</select>
+			</div>
+			<div class="settings-container">
+			</div>
+		</div>
+		<div class="settings-menu-screen" id="search-results">
+			<div class="toolbar">
+				<div class="home-icon">
+				</div>
+				<div class="settings-label">
+					Search Results
+				</div>
+			</div>
+			<div class="settings-multi-select">
+				<div class="multi-select-drop-down">
+					<img style="margin-top:5px; margin-left:5px; float:left;" src="img/checkbox-off.png" />
+					<div class="down-arrow">
+						▼
+					</div>
+					<ul class="multi-select-drop">
+						<li action="select-all">Select All</li>
+						<li action="select-none">Select None</li>
+					</ul>
+				</div>
+				<select class="bulk-action-select">
+					<option>Select Action</option>
+					<option value="play">Add to Play Queue</option>	
+					<option value="add-to-my-collection">Add to My Collection</option>	
+				</select>
+			</div>
+			<div class="settings-container">
+			</div>
+		</div>
+		<div class="console">
+		</div>
+		<div class="overlay">
+			<div class="overlay-container"></div>
+			<a class="close-overlay right" href="#">Close</a>	
+		</div>
+		<div class="intro" id="intro-1">
+			<div class="intro-container">
+				<h2 style="font-size:200%;">Welcome to Historigin</h2>	
+				<div style="margin-top:25px;">
+					<h2><div style="display:inline-block; width:50px; height:50px; margin:auto; background:#fff; line-height:50px;"><img style="vertical-align:middle" src="img/pins/heading/0.png" /></div> is your heading pin.</h2>
+					
+				</div>
+				<div style="margin-top:25px;">
+					<h2>Tap <div style="display:inline-block; width:50px; height:50px; margin:auto; background:#fff; line-height:50px;"><img style="vertical-align:middle" src="img/grip.png" /></div> to display the currently playing story</h2>
+					
+				</div>
+				<div style="margin-top:25px;">
+					<h2>Tap <div style="display:inline-block; width:50px; height:50px; margin:auto; background:#fff; line-height:50px;"><img style="vertical-align:middle" src="img/overlay-lock-position.png" /></div>  to center the map on your heading pin.</h2>
+				</div>
+				<div style="margin-top:25px;">
+					<h2>Tap <div style="display:inline-block; width:50px; height:50px; margin:auto; background:#fff; line-height:50px;"><img style="vertical-align:middle" src="img/icon-explore.png" /></div> to turn on explorer mode.</h2>
+				</div>
+				<div class="intro-overlay right" id="close-intro" style="font-size:200%; text-decoration:underline">Close</div>
+			</div>
+			
+		</div>
+		<script>
+			$(function(){
+				document.addEventListener("deviceready", function() {
+					
+                    //ttsPlugin.initTTS(function() {}, function(error) {});
+                    //ttsPlugin.setRate(0.3);
+                    //window.plugins.statusBarNotification.notify("Historigin", "Waiting for next story ...", Flag.FLAG_NO_CLEAR);
+                    Historigin.initialize();
+					
+				}, false);
+				app.initialize();
+
+			});
+		</script>
+    </body>
+</html>
