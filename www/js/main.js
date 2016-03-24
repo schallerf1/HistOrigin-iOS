@@ -408,7 +408,8 @@ var Historigin = {
 				$('#now-playing').html('<div class="grip"></div>' + playing.getItem(storykey).ctv + ', ' + playing.getItem(storykey).state + '<div style="padding:5%; font-size:12pt; line-height:normal;">' + playing.getItem(storykey).story + '</div><div><a class="suppress-load" href="' + playing.getItem(storykey).source + '">Source</a></div>');
 				//ttsPlugin.stopSpeaking();
 				//window.plugins.statusBarNotification.notify("Historigin", "Playing story for " + playing.getItem(storykey).ctv + ', ' + playing.getItem(storykey).state, Flag.FLAG_NO_CLEAR);
-				TTS.speak(playing.getItem(storykey).ctv + ' ' + playing.getItem(storykey).state + '... ' +  playing.getItem(storykey).story, function() {
+                         speachstring = playing.getItem(storykey).ctv + ' ' + playing.getItem(storykey).state + '... ' +  playing.getItem(storykey).story;
+                         TTS.speak({text: speachstring, rate:1.60}, function() {
                     hconsole.log('Story for ' + playing.getItem(storykey).ctv + ' completed. Adding ' + playing.getItem(storykey).ctv + ' to past');
 					past.addItem(storykey, playing.getItem(storykey));
 					qpast.addItem(storykey, playing.getItem(storykey));
@@ -735,8 +736,9 @@ var Historigin = {
 								//console.debug(playing.getAllItems());
 							
                     
-								if (TTS_ENABLED) {
-                                    TTS.speak(playing.getItem(key).ctv + ' ' + playing.getItem(key).state + '... ' + playing.getItem(key).story, function() {
+                                if (TTS_ENABLED) {
+                                    speachstring1 = playing.getItem(storykey).ctv + ' ' + playing.getItem(storykey).state + '... ' +  playing.getItem(storykey).story;
+                                    TTS.speak({text: speachstring1, rate:1.60}, function() {
                                         hconsole.log('Story for ' + key + ' completed. Adding ' + playing.getItem(key).ctv + ' to past');
 										past.addItem(key, playing.getItem(key));
 										qpast.addItem(key, playing.getItem(key));
