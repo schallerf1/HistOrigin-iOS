@@ -114,7 +114,7 @@ Map.prototype.setHeadingPinPosition = function(lats, lngs, headings){
 		this.setHeadingPin(lats, lngs, headings);
 	} else {
 		//console.debug(this.headingPin.getIcon().url);
-        hconsole.log("Heading Pin NOT FOUND");
+        //hconsole.log("Heading Pin NOT FOUND");
 		this.headingPin.setPosition(new google.maps.LatLng(lats, lngs));
 		if(headings){
 			this.headingPin.setIcon('img/pins/heading/' + headings + '.png');

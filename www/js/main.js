@@ -406,20 +406,22 @@ var Historigin = {
 				//console.debug(playing.getItem(storykey));
 				
 				$('#now-playing').html('<div class="grip"></div>' + playing.getItem(storykey).ctv + ', ' + playing.getItem(storykey).state + '<div style="padding:5%; font-size:12pt; line-height:normal;">' + playing.getItem(storykey).story + '</div><div><a class="suppress-load" href="' + playing.getItem(storykey).source + '">Source</a></div>');
-				//ttsPlugin.stopSpeaking();
 				//window.plugins.statusBarNotification.notify("Historigin", "Playing story for " + playing.getItem(storykey).ctv + ', ' + playing.getItem(storykey).state, Flag.FLAG_NO_CLEAR);
+                         
                          speachstring = playing.getItem(storykey).ctv + ' ' + playing.getItem(storykey).state + '... ' +  playing.getItem(storykey).story;
-                         TTS.speak({text: speachstring, rate:1.60}, function() {
-                    hconsole.log('Story for ' + playing.getItem(storykey).ctv + ' completed. Adding ' + playing.getItem(storykey).ctv + ' to past');
-					past.addItem(storykey, playing.getItem(storykey));
-					qpast.addItem(storykey, playing.getItem(storykey));
-					playing.removeItem(storykey);
-					$('#now-playing').html('<div class="grip"></div>Waiting for next story ...');
-					window.plugins.statusBarNotification.notify("Historigin", "Waiting for next story ...", Flag.FLAG_NO_CLEAR);
-					//hconsole.log('Past queue: ' + JSON.stringify(past.getAllItems()));
-				}, function(error) {
-					hconsole.log('Unable to play story: ' + error);
-				});
+                         
+                         TTS.speak({text: speachstring,
+                                locale: 'en-US',
+                                rate: 1.60
+                                }, function () {
+                                   hconsole.log('Story: ' + playing.getItem(storykey).ctv + ' done. Add ' + playing.getItem(storykey).ctv + ' to past');
+                                   past.addItem(storykey, playing.getItem(storykey));
+                                   qpast.addItem(storykey, playing.getItem(storykey));
+                                   playing.removeItem(storykey);
+                                   $('#now-playing').html('<div class="grip"></div>Waiting for next story ...');
+                                }, function (error) {
+                                hconsole.log('Unable to play story: ' + error);
+                                });
 			});
 		});
 		//VIEW STORY VIEWED FROM POP UP BOX
@@ -444,9 +446,9 @@ var Historigin = {
 			} else {
 				lat = position.coords.latitude;
 				lng = position.coords.longitude;
-				hconsole.log('Updating position to ' + lat + ' ' + lng);
+				//hconsole.log('Updating position to ' + lat + ' ' + lng);
 				if (position.coords.heading != null && position.coords.heading != NaN) {
-                    hconsole.log('HEADING VALUE: ' + position.coords.heading);
+                  //hconsole.log('HEADING VALUE: ' + position.coords.heading);
                   //heading = position.coords.heading;
                     heading = 0;
 				} else {
@@ -454,7 +456,7 @@ var Historigin = {
 				}
 
 				map.setHeadingPinPosition(lat, lng, heading);
-                hconsole.log('heading direction: ' + heading);
+                //hconsole.log('heading direction: ' + heading);
 				if (map.locked) {
 					map.setCenter(lat, lng);
 				}
@@ -505,7 +507,7 @@ var Historigin = {
 		function createWatch() {
 			//watchPosition fires whenever the device's position has changed
 			watchid = navigator.geolocation.watchPosition(function(position) {
-				hconsole.log('watchPosition callback successfully fired:');
+				//hconsole.log('watchPosition callback successfully fired:');
 				//hconsole.log(JSON.stringify(position));
 				updatePosition(position);
 				updateQueue(position);
@@ -521,7 +523,7 @@ var Historigin = {
 			//looks like we've got some settings
 			hconsole.log("loading local settings");
 			settings = $.parseJSON(localStorage.getItem('settings'));
-            settings['tts_enabled'] = true;
+            settings['TTS_ENABLED'] = true;
 		} else {
 			//default settings
 			settings['console'] = false;
@@ -719,53 +721,56 @@ var Historigin = {
 					hconsole.log('Playing Queue Empty, checking queue for next story.');
 					q = queued.getAllItems();
 					filterspeak = geo.getFilter();
+                    hconsole.log('filterspeak: ' + filterspeak + 'length: ' + filterspeak.length);
 					//console.debug(q);
-					for (var key in q)
+					for (key in q)
 						break;
 					if (key) {
-                        //hconsole.log(queued.getItem(key).ctv);
+                        hconsole.log('Have Key: ' + queued.getItem(key).ctv);
 						for (cnt = 0; cnt < filterspeak.length; cnt++) {
                             //hconsole.log('city: ' + queued.getItem(key).ctv);
+                    hconsole.log('FILTER: ' + filterspeak[cnt] + ' QcatID: ' + queued.getItem(key).categoryid);
 							if(queued.getItem(key).categoryid == filterspeak[cnt]) {
 								hconsole.log('Selecting story for: ' + queued.getItem(key).ctv);
 								playing.addItem(key, queued.getItem(key));
 								$('#now-playing').html('<div class="grip"></div>' + playing.getItem(key).ctv + ', ' + playing.getItem(key).state + '<div style="padding:5%; font-size:12pt; line-height:normal;">' + playing.getItem(key).story + '</div><div><a class="suppress-load" href="' + playing.getItem(key).source + '">Source</a></div>');
-								//window.plugins.statusBarNotification.notify("Historigin", "Playing story for " + playing.getItem(key).ctv + ', ' + playing.getItem(key).state, Flag.FLAG_NO_CLEAR);
+								
 								queued.removeItem(key);
 								$('#queued .story-section[story="' + key + '"]').remove();
 								//console.debug(playing.getAllItems());
 							
-                    
                                 if (TTS_ENABLED) {
-                                    speachstring1 = playing.getItem(storykey).ctv + ' ' + playing.getItem(storykey).state + '... ' +  playing.getItem(storykey).story;
-                                    TTS.speak({text: speachstring1, rate:1.60}, function() {
-                                        hconsole.log('Story for ' + key + ' completed. Adding ' + playing.getItem(key).ctv + ' to past');
-										past.addItem(key, playing.getItem(key));
-										qpast.addItem(key, playing.getItem(key));
-										playing.removeItem(key);
-										$('#now-playing').html('<div class="grip"></div>Waiting for next story ...');
-										//window.plugins.statusBarNotification.notify("Historigin", "Waiting for next story ...", Flag.FLAG_NO_CLEAR);
-										//hconsole.log('Past queue: ' + JSON.stringify(past.getAllItems()));
-									}, function(error) {
-										hconsole.log('Unable to play story: ' +  JSON.stringify(error));
-										queued.addItem(key, playing.getItem(key));
-										qpast.removeItem(key);
-										past.removeItem(key);
-										playing.removeItem(key);
-								
-									});
+                                    speachstring1 = playing.getItem(key).ctv + ' ' + playing.getItem(key).state + '... ' +  playing.getItem(key).story;
+                    
+                                        TTS.speak({text: speachstring1,
+                                            locale: 'en-US',
+                                            rate: 1.60
+                                            }, function () {
+                                                  hconsole.log('We should have spoken.');
+                                            hconsole.log('Story: ' + playing.getItem(key).ctv + ' completed. Add ' + playing.getItem(key).ctv + ' to past');
+                                                  past.addItem(key, playing.getItem(key));
+                                                  qpast.addItem(key, playing.getItem(key));
+                                                  playing.removeItem(key);
+                                            $('#now-playing').html('<div class="grip"></div>Waiting for next story ...');
+                                            }, function (error) {
+                                                  hconsole.log('Unable to play story: ' +  JSON.stringify(error));
+                                                  queued.addItem(key, playing.getItem(key));
+                                                  qpast.removeItem(key);
+                                                  past.removeItem(key);
+                                                  playing.removeItem(key);
+                                            });
 								} else {
-									hconsole.log('Story for ' + key + ' completed. Adding ' + playing.getItem(key).ctv + ' to past');
+									hconsole.log('Story: ' + playing.getItem(key).ctv + ' over. ' + playing.getItem(key).ctv + ' to past');
 									past.addItem(key, playing.getItem(key));
 									qpast.addItem(key, playing.getItem(key));
 									playing.removeItem(key);
 									$('#now-playing').html('<div class="grip"></div>Waiting for next story ...');
-									window.plugins.statusBarNotification.notify("Historigin", "Waiting for next story ...", Flag.FLAG_NO_CLEAR);
-									//hconsole.log('Past queue: ' + JSON.stringify(past.getAllItems()));
 								}
-							}
+                            } else {
+                                queued.removeItem(key);
+                            }
 						}
-					}
+                    }
 				}
 			}
 		}, 5000);
