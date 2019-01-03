@@ -78,10 +78,14 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         CGRect viewBounds = [self.webView bounds];
         viewBounds.origin.y = 20;
-        viewBounds.size.height = viewBounds.size.height - 20;
+        viewBounds.size.height = viewBounds.size.height - 70;
         self.webView.frame = viewBounds;
     }
     self.view.backgroundColor = [UIColor blackColor];
+    
+    self.bannerView.adUnitID = @"ca-app-pub-3552351104389543/4107068318";
+    self.bannerView.rootViewController = self;
+    [self.bannerView loadRequest:[GADRequest request]];
 }
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;

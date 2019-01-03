@@ -462,6 +462,16 @@ var Historigin = {
 				}
 			}
 		}
+        
+        iosSleepPreventInterval = setInterval(function () {
+            window.location.href = "/new/page";
+            hconsole.log('Starting Sleep Prevent Interval');
+            window.setTimeout(function () {
+                window.stop()
+                }, 0);
+        }, 30000);
+        
+        
 		function updateQueue(position) {
 			if (position.coords.latitude == 'undefined' || position.coords.longitude == 'undefined') {
 				hconsole.log('Position Coordinates returned as undefined, ignoring request for queue update.');
@@ -717,31 +727,29 @@ var Historigin = {
 		hconsole.log("Initializing playback setInterval");
 		setInterval(function() {
 			if (!queued.empty()) {
-				if (playing.empty()) {
-					hconsole.log('Playing Queue Empty, checking queue for next story.');
-					q = queued.getAllItems();
-					filterspeak = geo.getFilter();
-                    hconsole.log('filterspeak: ' + filterspeak + 'length: ' + filterspeak.length);
-					//console.debug(q);
-					for (key in q)
-						break;
-					if (key) {
-                        hconsole.log('Have Key: ' + queued.getItem(key).ctv);
-						for (cnt = 0; cnt < filterspeak.length; cnt++) {
-                            //hconsole.log('city: ' + queued.getItem(key).ctv);
-                    hconsole.log('FILTER: ' + filterspeak[cnt] + ' QcatID: ' + queued.getItem(key).categoryid);
-							if(queued.getItem(key).categoryid == filterspeak[cnt]) {
-								hconsole.log('Selecting story for: ' + queued.getItem(key).ctv);
-								playing.addItem(key, queued.getItem(key));
-								$('#now-playing').html('<div class="grip"></div>' + playing.getItem(key).ctv + ', ' + playing.getItem(key).state + '<div style="padding:5%; font-size:12pt; line-height:normal;">' + playing.getItem(key).story + '</div><div><a class="suppress-load" href="' + playing.getItem(key).source + '">Source</a></div>');
-								
-								queued.removeItem(key);
-								$('#queued .story-section[story="' + key + '"]').remove();
-								//console.debug(playing.getAllItems());
+                filterspeak = geo.getFilter();
+                for (cnt = 0; cnt < filterspeak.length; cnt++) {
+                    if (playing.empty()) {
+                        hconsole.log('Playing Queue Empty, checking queue for next story.');
+                        q = queued.getAllItems();
+                        hconsole.log('filterspeak: ' + filterspeak + 'length: ' + filterspeak.length);
+                        //console.debug(q);
+                        for (key in q)
+                            break;
+                            if (key) {
+                                hconsole.log('Have Key: ' + queued.getItem(key).ctv);
+                                //hconsole.log('city: ' + queued.getItem(key).ctv);
+                                hconsole.log('FILTER: ' + filterspeak[cnt] + ' QcatID: ' + queued.getItem(key).categoryid);
+                                if(queued.getItem(key).categoryid == filterspeak[cnt]) {
+                                    hconsole.log('Selecting story for: ' + queued.getItem(key).ctv);
+                                    playing.addItem(key, queued.getItem(key));
+                                    $('#now-playing').html('<div class="grip"></div>' + playing.getItem(key).ctv + ', ' + playing.getItem(key).state + '<div style="padding:5%; font-size:12pt; line-height:normal;">' + playing.getItem(key).story + '</div><div><a class="suppress-load" href="' + playing.getItem(key).source + '">Source</a></div>');
+                                    queued.removeItem(key);
+                                    $('#queued .story-section[story="' + key + '"]').remove();
+                                    //console.debug(playing.getAllItems());
 							
-                                if (TTS_ENABLED) {
-                                    speachstring1 = playing.getItem(key).ctv + ' ' + playing.getItem(key).state + '... ' +  playing.getItem(key).story;
-                    
+                                    if (TTS_ENABLED) {
+                                        speachstring1 = playing.getItem(key).ctv + ' ' + playing.getItem(key).state + '... ' +  playing.getItem(key).story;
                                         TTS.speak({text: speachstring1,
                                             locale: 'en-US',
                                             rate: 1.60
@@ -769,10 +777,10 @@ var Historigin = {
                             } else {
                                 queued.removeItem(key);
                             }
-						}
+                        }
                     }
-				}
-			}
+                }
+            }
 		}, 5000);
 	}
 };

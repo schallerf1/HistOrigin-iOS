@@ -26,3 +26,4 @@
 GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1
 
 #include "build-extras.xcconfig"
+#include "Pods/Target Support Files/Pods-HistOrigin/Pods-HistOrigin.debug.xcconfig"

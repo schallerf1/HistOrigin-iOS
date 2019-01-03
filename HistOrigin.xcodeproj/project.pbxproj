@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
+		07035C7321DEAEB50088C08A /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07035C7221DEAEB50088C08A /* GoogleMobileAds.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		0724167E1D01CC6E00AB95AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0724167D1D01CC6E00AB95AF /* GoogleService-Info.plist */; };
 		07566EB71CB6A98A0075D264 /* Dublin-Hilliard.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 07566EB61CB6A98A0075D264 /* Dublin-Hilliard.gpx */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -21,6 +23,7 @@
 		702FAEA900054F44BAE7823A /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = F804E44601C447A8AC7620B5 /* CDVInAppBrowser.m */; };
 		A63B381CE6C44F198EBD5962 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D119895E1D4B2286A79B8A /* CoreLocation.framework */; };
 		AC33372374744A7C8A342A13 /* CDVTTS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424728BB37A4C5BAC61020A /* CDVTTS.m */; };
+		F01C59F29CA67F37D862AA3C /* libPods-HistOrigin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76627CC452D0B1A2734787A2 /* libPods-HistOrigin.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,10 @@
 
 /* Begin PBXFileReference section */
 		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HistOrigin/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		07035C7221DEAEB50088C08A /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.37.0/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		07035C7621DEB2700088C08A /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		07035C7721DEB2700088C08A /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0724167D1D01CC6E00AB95AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07566EB61CB6A98A0075D264 /* Dublin-Hilliard.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Dublin-Hilliard.gpx"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,6 +66,7 @@
 		32CA4F630368D1EE00C91783 /* HistOrigin-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HistOrigin-Prefix.pch"; sourceTree = "<group>"; };
 		61DFA28C7F184FC389BF529E /* CDVLocation.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLocation.m; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; };
 		69D119895E1D4B2286A79B8A /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 0; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		76627CC452D0B1A2734787A2 /* libPods-HistOrigin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HistOrigin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107310486CEB800E47090 /* HistOrigin-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "HistOrigin-Info.plist"; path = "HistOrigin/HistOrigin-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
 		9BFCCC7697024B21AC304685 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; };
 		B9199DFC47404464BDFEED56 /* CDVLocation.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocation.h; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; };
@@ -77,12 +85,24 @@
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				A63B381CE6C44F198EBD5962 /* CoreLocation.framework in Frameworks */,
+				07035C7321DEAEB50088C08A /* GoogleMobileAds.framework in Frameworks */,
+				F01C59F29CA67F37D862AA3C /* libPods-HistOrigin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07035C7521DEB2700088C08A /* GoogleMobileAdsSdkiOS-7.37.0 */ = {
+			isa = PBXGroup;
+			children = (
+				07035C7621DEB2700088C08A /* GoogleMobileAds.framework */,
+				07035C7721DEB2700088C08A /* README.txt */,
+			);
+			name = "GoogleMobileAdsSdkiOS-7.37.0";
+			path = "../../../../../Downloads/GoogleMobileAdsSdkiOS-7.37.0";
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +127,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				07035C7221DEAEB50088C08A /* GoogleMobileAds.framework */,
 				07566EB61CB6A98A0075D264 /* Dublin-Hilliard.gpx */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
@@ -118,6 +139,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				BB0590C7B62AE4FDEABFD1DC /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -147,7 +169,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07035C7521DEB2700088C08A /* GoogleMobileAdsSdkiOS-7.37.0 */,
 				69D119895E1D4B2286A79B8A /* CoreLocation.framework */,
+				76627CC452D0B1A2734787A2 /* libPods-HistOrigin.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,9 +208,17 @@
 			path = HistOrigin/Plugins;
 			sourceTree = SOURCE_ROOT;
 		};
+		BB0590C7B62AE4FDEABFD1DC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB87FDF11871DA420020F90C /* Staging */ = {
 			isa = PBXGroup;
 			children = (
+				0724167D1D01CC6E00AB95AF /* GoogleService-Info.plist */,
 				F840E1F0165FE0F500CFE078 /* config.xml */,
 				301BF56E109A69640062928A /* www */,
 			);
@@ -200,10 +232,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "HistOrigin" */;
 			buildPhases = (
+				902DA3519F311B795FD97C17 /* [CP] Check Pods Manifest.lock */,
 				304B58A110DAC018002A0835 /* Copy www directory */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				DFB787474EE9D63A601B31FF /* [CP] Embed Pods Frameworks */,
+				9F65DF8C2040B2A5E0471914 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,6 +262,9 @@
 						DevelopmentTeam = 76ZC4VMCGM;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -276,6 +314,7 @@
 				3047A5141AB8059700498E2A /* build.xcconfig in Resources */,
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
 				3047A5121AB8059700498E2A /* build-debug.xcconfig in Resources */,
+				0724167E1D01CC6E00AB95AF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +334,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
+			showEnvVarsInLog = 0;
+		};
+		902DA3519F311B795FD97C17 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9F65DF8C2040B2A5E0471914 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HistOrigin/Pods-HistOrigin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFB787474EE9D63A601B31FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HistOrigin/Pods-HistOrigin-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,6 +418,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -344,7 +429,9 @@
 				INFOPLIST_FILE = "HistOrigin/HistOrigin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = HistOrigin;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -358,6 +445,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HistOrigin/HistOrigin-Prefix.pch";
@@ -365,7 +453,9 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "HistOrigin/HistOrigin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = HistOrigin;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -417,6 +507,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "f0336297-6d3e-48f4-9353-65dc03111a51";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};

@@ -28,9 +28,11 @@
 #import <Cordova/CDVViewController.h>
 #import <Cordova/CDVCommandDelegateImpl.h>
 #import <Cordova/CDVCommandQueue.h>
+@import GoogleMobileAds;
 
 @interface MainViewController : CDVViewController
 
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @end
 
 @interface MainCommandDelegate : CDVCommandDelegateImpl
